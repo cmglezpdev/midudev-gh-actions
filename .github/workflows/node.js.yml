@@ -10,8 +10,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  learning:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 21.x]
 
     steps:
       - name: Checkout code
@@ -21,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4.0.3
         with:
           node-version: 20.x
-          cache: 'npm'
+          # cache: 'npm'
 
       - name: Install dependencies
         run: |
@@ -30,10 +34,3 @@ jobs:
 
       - name: Run lint
         run: npm run lint
-
-      - name: "Hello World"
-        run: echo "Hello world"
-      - name: Give me the date
-        run: date
-      - name: Show the content of the folder
-        run: ls -la
